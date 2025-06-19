@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunarCoin - Next Generation Cryptocurrency on BNB Chain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); }
+        .coin-glow { box-shadow: 0 0 30px rgba(102, 126, 234, 0.3); }
+        .pulse-animation { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-effect border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-moon text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold">LunarCoin</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                    <a href="#tokenomics" class="hover:text-blue-400 transition-colors">Tokenomics</a>
+                    <a href="#buy" class="hover:text-blue-400 transition-colors">Buy Now</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="connectWallet" class="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all">
+                        Connect Wallet
+                    </button>
+                    <button id="signInBtn" class="border border-gray-600 px-4 py-2 rounded-lg hover:bg-gray-800 transition-all">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4">
+            <div class="mb-8">
+                <div class="w-32 h-32 mx-auto bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center coin-glow pulse-animation">
+                    <i class="fas fa-moon text-4xl text-white"></i>
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                LunarCoin
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-200">
+                The Future of Decentralized Finance on BNB Chain
+            </p>
+            <p class="text-lg mb-12 text-gray-300 max-w-2xl mx-auto">
+                Join the lunar revolution with our innovative cryptocurrency. Built on BNB Chain for lightning-fast transactions and minimal fees.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button id="buyNowBtn" class="bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-4 rounded-lg text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105">
+                    Buy LunarCoin Now
+                </button>
+                <button class="border border-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all">
+                    Learn More
+                </button>
+            </div>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="glass-effect p-6 rounded-lg">
+                    <div class="text-3xl font-bold text-blue-400">$0.001</div>
+                    <div class="text-gray-300">Current Price</div>
+                </div>
+                <div class="glass-effect p-6 rounded-lg">
+                    <div class="text-3xl font-bold text-purple-400">1B</div>
+                    <div class="text-gray-300">Total Supply</div>
+                </div>
+                <div class="glass-effect p-6 rounded-lg">
+                    <div class="text-3xl font-bold text-green-400">500M</div>
+                    <div class="text-gray-300">Available for Sale</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Why LunarCoin?</h2>
+                <p class="text-xl text-gray-400">Revolutionary features for the next generation of crypto</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-8 bg-gray-900 rounded-lg hover:bg-gray-700 transition-all">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Lightning Fast</h3>
+                    <p class="text-gray-400">Built on BNB Chain for instant transactions with minimal fees</p>
+                </div>
+                <div class="text-center p-8 bg-gray-900 rounded-lg hover:bg-gray-700 transition-all">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Secure & Audited</h3>
+                    <p class="text-gray-400">Smart contracts audited by leading security firms</p>
+                </div>
+                <div class="text-center p-8 bg-gray-900 rounded-lg hover:bg-gray-700 transition-all">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Community Driven</h3>
+                    <p class="text-gray-400">Governed by the community with transparent voting</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Tokenomics</h2>
+                <p class="text-xl text-gray-400">Fair and transparent token distribution</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center p-4 bg-gray-800 rounded-lg">
+                        <span>Public Sale</span>
+                        <span class="text-blue-400 font-semibold">50%</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-gray-800 rounded-lg">
+                        <span>Liquidity Pool</span>
+                        <span class="text-purple-400 font-semibold">20%</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-gray-800 rounded-lg">
+                        <span>Development</span>
+                        <span class="text-green-400 font-semibold">15%</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-gray-800 rounded-lg">
+                        <span>Marketing</span>
+                        <span class="text-yellow-400 font-semibold">10%</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-gray-800 rounded-lg">
+                        <span>Team (Locked)</span>
+                        <span class="text-red-400 font-semibold">5%</span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="w-64 h-64 mx-auto bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">1B</div>
+                            <div class="text-lg">Total Supply</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buy Section -->
+    <section id="buy" class="py-20 bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Buy LunarCoin</h2>
+                <p class="text-xl text-gray-400">Get in early at the best price</p>
+            </div>
+            <div class="bg-gray-900 rounded-2xl p-8 glass-effect">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6">Purchase Details</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between">
+                                <span>Current Price:</span>
+                                <span class="text-blue-400 font-semibold">$0.001 USD</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Minimum Purchase:</span>
+                                <span class="text-green-400 font-semibold">1,000 LUNAR</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Maximum Purchase:</span>
+                                <span class="text-purple-400 font-semibold">10,000,000 LUNAR</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Payment Method:</span>
+                                <span class="text-yellow-400 font-semibold">BNB</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6">Purchase Form</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Amount (LUNAR)</label>
+                                <input type="number" id="lunarAmount" placeholder="Enter amount" min="1000" class="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Cost (BNB)</label>
+                                <input type="text" id="bnbCost" readonly class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-400">
+                            </div>
+                            <button id="purchaseBtn" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all disabled:opacity-50" disabled>
+                                Connect Wallet to Purchase
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <div class="bg-gray-900 p-8 rounded-2xl max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold">Sign In to LunarCoin</h3>
+                <p class="text-gray-400 mt-2">Access your account</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="email" class="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="password" class="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none">
+                </div>
+                <button id="signInSubmit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all">
+                    Sign In
+                </button>
+                <div class="text-center">
+                    <span class="text-gray-400">or</span>
+                </div>
+                <button id="walletSignIn" class="w-full border border-gray-600 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all">
+                    Sign In with Wallet
+                </button>
+            </div>
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-moon text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold">LunarCoin</span>
+                </div>
+                <p class="text-gray-400 mb-6">Building the future of decentralized finance</p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <i class="fab fa-telegram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <i class="fab fa-discord text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">© 2024 LunarCoin. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
