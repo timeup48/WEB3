@@ -21,6 +21,19 @@ const LUNARCOIN_CONFIG = {
         eth: '0x18de791726b62e68fd4e7b5c9de8a22354d05997'
     },
     
+    // Airdrop Configuration
+    airdrop: {
+        amount: 100, // 100 LUNAR tokens per claim
+        valueUSD: 0.10, // $0.10 USD value
+        maxClaims: 10000, // Maximum number of claims
+        requirements: [
+            'Valid email address',
+            'BNB Chain wallet address',
+            'One claim per wallet/email',
+            'Must agree to terms and conditions'
+        ]
+    },
+    
     // Network Configuration
     network: {
         chainId: '0x38', // BSC Mainnet

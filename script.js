@@ -8,6 +8,8 @@ class LunarCoinApp {
         this.bnbPrice = 300; // Mock BNB price in USD
         this.contractAddress = '0x742d35Cc6634C0532925a3b8D4C9db96C4b5Da5e';
         this.paymentAddress = '0x18de791726b62e68fd4e7b5c9de8a22354d05997'; // Payment address for BNB/ETH
+        this.airdropAmount = 100; // 100 LUNAR tokens for airdrop
+        this.claimedAirdrops = new Set(); // Track claimed airdrops
         
         this.init();
     }
@@ -32,6 +34,13 @@ class LunarCoinApp {
         document.getElementById('lunarAmount').addEventListener('input', () => this.updatePurchaseForm());
         document.getElementById('purchaseBtn').addEventListener('click', () => this.handlePurchase());
         document.getElementById('buyNowBtn').addEventListener('click', () => this.scrollToBuySection());
+        
+        // Airdrop functionality
+        document.getElementById('connectWalletAirdrop').addEventListener('click', () => this.connectWalletForAirdrop());
+        document.getElementById('claimAirdrop').addEventListener('click', () => this.handleAirdropClaim());
+        document.getElementById('airdropEmail').addEventListener('input', () => this.validateAirdropForm());
+        document.getElementById('airdropWallet').addEventListener('input', () => this.validateAirdropForm());
+        document.getElementById('agreeTerms').addEventListener('change', () => this.validateAirdropForm());
         
         // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -281,6 +290,103 @@ class LunarCoinApp {
                 }
             }, 300);
         }, 5000);
+    }
+
+    // Airdrop Methods
+    async connectWalletForAirdrop() {
+        await this.connectWallet();
+        if (this.isConnected && this.account) {
+            document.getElementById('airdropWallet').value = this.account;
+            this.validateAirdropForm();
+        }
+    }
+
+    validateAirdropForm() {
+        const email = document.getElementById('airdropEmail').value;
+        const wallet = document.getElementById('airdropWallet').value;
+        const agreeTerms = document.getElementById('agreeTerms').checked;
+        const claimBtn = document.getElementById('claimAirdrop');
+
+        const isValidEmail = email && email.includes('@') && email.includes('.');
+        const isValidWallet = wallet && wallet.startsWith('0x') && wallet.length === 42;
+        const isFormValid = isValidEmail && isValidWallet && agreeTerms;
+
+        claimBtn.disabled = !isFormValid;
+        
+        if (isFormValid) {
+            claimBtn.classList.remove('opacity-50');
+        } else {
+            claimBtn.classList.add('opacity-50');
+        }
+    }
+
+    async handleAirdropClaim() {
+        const email = document.getElementById('airdropEmail').value;
+        const wallet = document.getElementById('airdropWallet').value;
+        
+        // Check if already claimed
+        const claimKey = `${email}-${wallet}`;
+        if (this.claimedAirdrops.has(claimKey)) {
+            this.showNotification('Airdrop already claimed for this email/wallet combination!', 'error');
+            return;
+        }
+
+        // Validate inputs
+        if (!email || !email.includes('@')) {
+            this.showNotification('Please enter a valid email address!', 'error');
+            return;
+        }
+
+        if (!wallet || !wallet.startsWith('0x') || wallet.length !== 42) {
+            this.showNotification('Please enter a valid BNB Chain wallet address!', 'error');
+            return;
+        }
+
+        try {
+            this.showNotification('Processing airdrop claim...', 'info');
+
+            // Simulate airdrop transaction
+            setTimeout(() => {
+                // Mark as claimed
+                this.claimedAirdrops.add(claimKey);
+                
+                // Generate mock transaction hash
+                const txHash = '0x' + Math.random().toString(16).substr(2, 64);
+                
+                // Show success
+                this.showAirdropSuccess(txHash);
+                this.showNotification(`Successfully claimed ${this.airdropAmount} LUNAR tokens!`, 'success');
+                
+                // Reset form
+                this.resetAirdropForm();
+            }, 2000);
+
+            // In real implementation, this would interact with smart contract:
+            // const airdropTx = await this.sendAirdropTransaction(wallet, this.airdropAmount);
+
+        } catch (error) {
+            console.error('Airdrop error:', error);
+            this.showNotification('Airdrop claim failed. Please try again.', 'error');
+        }
+    }
+
+    showAirdropSuccess(txHash) {
+        document.getElementById('airdropForm').classList.add('hidden');
+        document.getElementById('airdropSuccess').classList.remove('hidden');
+        document.getElementById('airdropTxHash').textContent = txHash;
+    }
+
+    resetAirdropForm() {
+        document.getElementById('airdropEmail').value = '';
+        document.getElementById('airdropWallet').value = '';
+        document.getElementById('agreeTerms').checked = false;
+        this.validateAirdropForm();
+        
+        // Reset to form view after 10 seconds
+        setTimeout(() => {
+            document.getElementById('airdropForm').classList.remove('hidden');
+            document.getElementById('airdropSuccess').classList.add('hidden');
+        }, 10000);
     }
 }
 
