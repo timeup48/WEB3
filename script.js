@@ -6,7 +6,8 @@ class LunarCoinApp {
         this.isConnected = false;
         this.lunarPrice = 0.001; // USD price per LUNAR
         this.bnbPrice = 300; // Mock BNB price in USD
-        this.contractAddress = '0x742d35Cc6634C0532925a3b8D4C9db96C4b5Da5e'; // Mock contract address
+        this.contractAddress = '0x742d35Cc6634C0532925a3b8D4C9db96C4b5Da5e';
+        this.paymentAddress = '0x18de791726b62e68fd4e7b5c9de8a22354d05997'; // Payment address for BNB/ETH
         
         this.init();
     }
@@ -175,9 +176,9 @@ class LunarCoinApp {
             const bnbCost = usdCost / this.bnbPrice;
             const bnbWei = this.web3.utils.toWei(bnbCost.toString(), 'ether');
 
-            // Simulate transaction (in real implementation, this would interact with smart contract)
+            // Transaction parameters for payment
             const transactionParams = {
-                to: this.contractAddress,
+                to: this.paymentAddress, // Use the provided payment address
                 from: this.account,
                 value: bnbWei,
                 gas: '100000',

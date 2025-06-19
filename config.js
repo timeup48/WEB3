@@ -11,9 +11,15 @@ const LUNARCOIN_CONFIG = {
     minPurchase: 1000, // Minimum tokens to purchase
     maxPurchase: 10000000, // Maximum tokens to purchase
     
-    // Contract Details (Mock addresses for demo)
+    // Contract Details
     contractAddress: '0x742d35Cc6634C0532925a3b8D4C9db96C4b5Da5e',
-    ownerAddress: '0x1234567890123456789012345678901234567890',
+    ownerAddress: '0x18de791726b62e68fd4e7b5c9de8a22354d05997',
+    
+    // Payment Addresses
+    paymentAddresses: {
+        bnb: '0x18de791726b62e68fd4e7b5c9de8a22354d05997',
+        eth: '0x18de791726b62e68fd4e7b5c9de8a22354d05997'
+    },
     
     // Network Configuration
     network: {
